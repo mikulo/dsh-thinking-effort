@@ -13,7 +13,7 @@ import {
 
 export const SETTINGS_NAMESPACE = 'llm-pi-ai'
 export const DEFAULT_LEVELS = { off: null, high: 'high', max: 'max' } as const
-const LOG_PREFIX = '[@hytime/dsh-thinking-effort]'
+const LOG_PREFIX = '[@mikulo/dsh-thinking-effort]'
 
 /**
  * Most fill passes one trigger may run before it stops re-running itself.

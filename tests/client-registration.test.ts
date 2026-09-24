@@ -676,7 +676,7 @@ describe('client registration', () => {
   })
 
   it('exports the scoped identity and exact hard injection list', () => {
-    expect(name).toBe('@hytime/dsh-thinking-effort')
+    expect(name).toBe('@mikulo/dsh-thinking-effort')
     expect(inject).toEqual(['slots', 'connection', 'locale'])
   })
 

@@ -17,7 +17,7 @@ import { SETTINGS_NAMESPACE } from './settings.js'
 import { PLUGIN_ENTRY_ID } from '../compat/settings-model.js'
 import type { HostContext, SettingsPathOp } from './types.js'
 
-const LOG_PREFIX = '[@hytime/dsh-thinking-effort]'
+const LOG_PREFIX = '[@mikulo/dsh-thinking-effort]'
 
 /**
  * Most scan/act passes one settings event may run before the chain stops

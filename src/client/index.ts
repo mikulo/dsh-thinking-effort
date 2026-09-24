@@ -8,7 +8,7 @@ import { LegacyMigrationModal } from './components/LegacyMigrationModal.js'
 import { apply as registerComposerSeat } from './thinking-slider/index.js'
 import type { ClientContext, ClientLocale, ClientSlots } from './types.js'
 
-export const name = '@hytime/dsh-thinking-effort'
+export const name = '@mikulo/dsh-thinking-effort'
 export const inject = ['slots', 'connection', 'locale'] as const
 
 const SLOT_NAME = 'settings.section'

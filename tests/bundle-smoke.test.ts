@@ -74,7 +74,7 @@ describe('build artifacts', () => {
   it('emits and executes the lazy client descriptor contract', () => {
     const source = readArtifact('lib/client.js')
     expect(source).toContain('window.__ModuleLoader__.load')
-    expect(source).toContain("id: '@hytime/dsh-thinking-effort'")
+    expect(source).toContain("id: '@mikulo/dsh-thinking-effort'")
     expect(source).toContain(JSON.stringify(readPackageVersion()))
     expect(source).toContain('return module.exports;')
     expect(source).not.toContain("ctx.inject(['remote',")
@@ -89,8 +89,8 @@ describe('build artifacts', () => {
       throw new Error(`Unexpected external dependency: ${specifier}`)
     })
 
-    expect(descriptor.id).toBe('@hytime/dsh-thinking-effort')
-    expect(factory.name).toBe('@hytime/dsh-thinking-effort')
+    expect(descriptor.id).toBe('@mikulo/dsh-thinking-effort')
+    expect(factory.name).toBe('@mikulo/dsh-thinking-effort')
     expect(factory.inject).toEqual(['slots', 'connection', 'locale'])
     expect(typeof factory.apply).toBe('function')
     expect(required).toContain('react')

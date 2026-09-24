@@ -403,7 +403,7 @@ const publishQualityCommands = [
 PACKAGE_VERSION="$(node -p "require('./package.json').version")"
 query_output="$RUNNER_TEMP/dsh-thinking-effort-npm-view.txt"
 set +e
-npm view @hytime/dsh-thinking-effort@\${PACKAGE_VERSION} version --json > "$query_output" 2>&1
+npm view @mikulo/dsh-thinking-effort@\${PACKAGE_VERSION} version --json > "$query_output" 2>&1
 query_status=$?
 set -e
 if [ "$query_status" -eq 0 ]; then
@@ -454,7 +454,7 @@ function assertPublishWorkflowStructure(workflow) {
     'quality job must use Node 22.19.0',
   );
   const duplicateCheck = publishRunCommands(quality).find((command) =>
-    command.includes('npm view @hytime/dsh-thinking-effort@${PACKAGE_VERSION} version --json'),
+    command.includes('npm view @mikulo/dsh-thinking-effort@${PACKAGE_VERSION} version --json'),
   );
   assert.ok(duplicateCheck, 'quality job must check whether the package version already exists');
   assert.match(duplicateCheck, /PACKAGE_VERSION="\$\(node -p/);
@@ -557,7 +557,7 @@ git merge-base --is-ancestor "$GITHUB_SHA" origin/main
 
   assert.match(publishTagGuard.run, /git fetch --no-tags origin main/);
   assert.match(publishTagGuard.run, /git merge-base --is-ancestor "\$GITHUB_SHA" origin\/main/);
-  assert.doesNotMatch(publishRunCommands(publish).join('\n'), /npm view @hytime\/dsh-thinking-effort@\$\{PACKAGE_VERSION\} version --json/);
+  assert.doesNotMatch(publishRunCommands(publish).join('\n'), /npm view @mikulo\/dsh-thinking-effort@\$\{PACKAGE_VERSION\} version --json/);
   assert.equal(publishPackage.run, 'npm publish --provenance --access public');
 
 }

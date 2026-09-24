@@ -2,9 +2,10 @@
 
 A [DSH (DeepSeek Harness)](https://github.com/deepseek-ai/deepseek-harness) plugin that adds configurable reasoning effort levels to hand-declared `llm-pi-ai` models and sets a default reasoning effort for subagents.
 
-[![npm version](https://img.shields.io/npm/v/@hytime/dsh-thinking-effort)](https://www.npmjs.com/package/@hytime/dsh-thinking-effort)
-[![npm downloads](https://img.shields.io/npm/dm/@hytime/dsh-thinking-effort)](https://www.npmjs.com/package/@hytime/dsh-thinking-effort)
-[![GitHub license](https://img.shields.io/github/license/hytime/dsh-thinking-effort)](https://github.com/hytime/dsh-thinking-effort/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/mikulo/dsh-thinking-effort)](https://github.com/mikulo/dsh-thinking-effort/blob/main/LICENSE)
+> **About this fork:** this repository is an independent fork of [hytime/dsh-thinking-effort](https://github.com/hytime/dsh-thinking-effort). The package is renamed to `@mikulo/dsh-thinking-effort`, is not published to npm, and is installed, updated, and removed straight from GitHub (commands below). The built `lib/index.js` and `lib/client.js` are committed, so a git install needs no local build; after changing sources run `npm run build` and commit `lib/` together with them.
+>
+> Switching from the upstream `@hytime/dsh-thinking-effort`: run `dsh plugin --profile <profile> remove @hytime/dsh-thinking-effort`, then `add github:mikulo/dsh-thinking-effort`; if the profile's `cordis.patch.yml` still has an `id: thinking-effort` entry, change its `name` to `'@mikulo/dsh-thinking-effort'` to keep your settings.
 
 - [中文 README](./README.zh.md)
 - [日本語 README](./README.ja.md)
@@ -61,7 +62,7 @@ These identifiers have different responsibilities:
 
 | Identifier | Purpose |
 | --- | --- |
-| `@hytime/dsh-thinking-effort` | npm package, browser bundle path, loader ID, and host/client runtime ID |
+| `@mikulo/dsh-thinking-effort` | npm package, browser bundle path, loader ID, and host/client runtime ID |
 | `thinking-effort` | Cordis composition entry ID and settings Slot ID |
 
 ## Features
@@ -86,16 +87,16 @@ Use the official DSH CLI to manage the plugin profile. A plain `npm install` doe
 
 ```bash
 # Install the latest version
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort
 
 # Install a specific version
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 
 # Upgrade
-dsh plugin --profile <profile> update @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> update @mikulo/dsh-thinking-effort
 
 # Remove
-dsh plugin --profile <profile> remove @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> remove @mikulo/dsh-thinking-effort
 rm -f "${DSH_HOME:-$HOME/.dsh}/thinking-effort-loaded.json"
 ```
 
@@ -216,7 +217,7 @@ DSH `0.1.7` renames `settings.yaml` and imports it exactly once, and plugin rele
 
 The page header contains the language selector. Below it, the Subagent default effort card controls the default for requests without an explicit effort. The Quick settings controls apply a preset across models. Provider sections can be expanded or collapsed; each model row exposes input capabilities, context length, and gateway compatibility controls in its settings area. `models[]` saves use one complete array set rather than an array-index path operation.
 
-![English Model capabilities and effort settings page](https://raw.githubusercontent.com/hytime/dsh-thinking-effort/main/docs/assets/screenshots/plugin-en-settings-expanded.png)
+![English Model capabilities and effort settings page](https://raw.githubusercontent.com/mikulo/dsh-thinking-effort/main/docs/assets/screenshots/plugin-en-settings-expanded.png)
 
 See the complete Chinese, English, Japanese, and Korean screenshot gallery in [`docs/SCREENSHOTS.md`](./docs/SCREENSHOTS.md).
 
@@ -244,7 +245,7 @@ See the complete Chinese, English, Japanese, and Korean screenshot gallery in [`
 - The workflow uses `npm ci`; maintainers must commit `package-lock.json` when dependencies change.
 - The ordinary CI workflow does not publish to npm. Publishing is triggered only by a `v<version>` tag through `publish.yml`.
 - Before creating a release tag, update `package.json` version and `CHANGELOG.md` files, commit those changes, and create the matching `v<version>` tag. The tag must point to a commit in the `main` history.
-- npm Trusted Publishing must be configured for repository `hytime/dsh-thinking-effort` and workflow `publish.yml`. The workflow publishes provenance through GitHub OIDC and does not require `NPM_TOKEN`.
+- npm Trusted Publishing must be configured for repository `mikulo/dsh-thinking-effort` and workflow `publish.yml`. The workflow publishes provenance through GitHub OIDC and does not require `NPM_TOKEN`.
 - Before publishing, the workflow builds and tests five official DSH capability representatives in this order: `dsh-v0.1.0-rc.7` (`0.1.0-rc.7`), `dsh-v0.1.1-rc.2` (`0.1.1-rc.2`), `dsh-v0.1.3-alpha.2` (`0.1.3-alpha.2`), `dsh-v0.1.6-alpha.1` (`0.1.6-alpha.1`), and `dsh-v0.1.7-alpha.1` (`0.1.7-alpha.1`), using the official `dsh plugin` command and real compatibility checks. The `0.1.6-alpha.1` (namespace model) and `0.1.7-alpha.1` (entry-config model) representatives both run the real-browser DOM probe.
 - The workflow never changes the package version or any `CHANGELOG` file automatically; an existing npm version also blocks publishing.
 

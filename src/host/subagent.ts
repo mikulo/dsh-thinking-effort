@@ -13,7 +13,7 @@ import { hasModelSourceConflict } from '../compat/model-source.js'
 export const STANDARD_LEVELS = ['off', 'minimal', 'low', 'medium', 'high', 'xhigh', 'max'] as const
 export type StandardLevel = (typeof STANDARD_LEVELS)[number]
 
-const LOG_PREFIX = '[@hytime/dsh-thinking-effort]'
+const LOG_PREFIX = '[@mikulo/dsh-thinking-effort]'
 
 type Logger = (...args: unknown[]) => void
 

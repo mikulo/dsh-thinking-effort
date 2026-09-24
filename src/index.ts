@@ -5,7 +5,7 @@ import { installLegacyMigration } from './host/legacy-watcher.js'
 import { handleAgentRequest } from './host/subagent.js'
 import type { HostContext } from './host/types.js'
 
-export const name = '@hytime/dsh-thinking-effort'
+export const name = '@mikulo/dsh-thinking-effort'
 export const inject = ['settings', 'timer', 'llm'] as const
 
 /**

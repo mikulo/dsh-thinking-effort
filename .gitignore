@@ -1,5 +1,8 @@
 node_modules/
-lib/
+# Built artifacts are committed so git installs need no local build;
+# only tsc's intermediate JS under lib/types is ignored.
+lib/types/**/*.js
+lib/**/*.map
 *.tgz
 *.log
 .pnpm-store/

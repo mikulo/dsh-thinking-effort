@@ -16,7 +16,7 @@
 
 - `<profile>`：変更対象の DSH profile。通常は `web`。
 - `${DSH_HOME}`：DSH home。既定値は `$HOME/.dsh`。
-- `@hytime/dsh-thinking-effort`：npm パッケージおよびランタイムプラグイン ID。
+- `@mikulo/dsh-thinking-effort`：npm パッケージおよびランタイムプラグイン ID。
 - `thinking-effort`：Cordis composition と設定 Slot の ID。
 
 ## 0. 前提条件と profile の確認
@@ -247,13 +247,13 @@ providers:
 最新版をインストールします。
 
 ```bash
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort
 ```
 
 今回のリリースを明示してインストールします。
 
 ```bash
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 ```
 
 公式 CLI は profile の依存関係、lockfile、`dsh.profile.bundles` を自動的に更新します。YAML の行を手動で追加しないでください。
@@ -263,13 +263,13 @@ dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
 registry の最新版へ更新します。
 
 ```bash
-dsh plugin --profile <profile> update @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> update @mikulo/dsh-thinking-effort
 ```
 
 特定バージョンへ更新する場合：
 
 ```bash
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 ```
 
 Host の変更には DSH を再起動し、Client の変更には Web ページを更新してください。
@@ -280,14 +280,14 @@ Host の変更には DSH を再起動し、Client の変更には Web ページ�
 
 ```text
 dsh-thinking-effort
-github:hytime/dsh-thinking-effort
+github:mikulo/dsh-thinking-effort
 ```
 
 古い依存関係が残っている場合は公式コマンドを使います。
 
 ```bash
 dsh plugin --profile <profile> remove dsh-thinking-effort
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 ```
 
 依存関係は別のツールで削除済みですが、古い bundle が残っている場合は次で composition を確認します。
@@ -299,9 +299,9 @@ dsh --profile <profile> --dump-default-config
 `name: dsh-thinking-effort` が残っている場合は profile lockfile から古い GitHub commit を確認し、公式 CLI で再調整します。
 
 ```bash
-dsh plugin --profile <profile> add github:hytime/dsh-thinking-effort#<old-commit>
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#<old-commit>
 dsh plugin --profile <profile> remove dsh-thinking-effort
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 ```
 
 新しい bundle リストに旧パッケージ名を追加しないでください。
@@ -311,9 +311,9 @@ dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
 依存関係とバージョンを確認します。
 
 ```bash
-grep -n "@hytime/dsh-thinking-effort" \
+grep -n "@mikulo/dsh-thinking-effort" \
   "${DSH_HOME:-$HOME/.dsh}/profiles/<profile>/package.json"
-node -p "require('${DSH_HOME:-$HOME/.dsh}/profiles/<profile>/node_modules/@hytime/dsh-thinking-effort/package.json').version"
+node -p "require('${DSH_HOME:-$HOME/.dsh}/profiles/<profile>/node_modules/@mikulo/dsh-thinking-effort/package.json').version"
 ```
 
 このリリースではバージョンが `0.3.3` である必要があります。
@@ -333,7 +333,7 @@ dsh --profile <profile> --dump-default-config
 
 ```yaml
 - id: thinking-effort
-  name: '@hytime/dsh-thinking-effort'
+  name: '@mikulo/dsh-thinking-effort'
 ```
 
 次の旧 bundle 行は含まれてはいけません。
@@ -374,7 +374,7 @@ cat "${DSH_HOME:-$HOME/.dsh}/thinking-effort-loaded.json"
 
 メンテナーは `package.json` の version と該当する `CHANGELOG` を更新してコミットし、一致する `v<version>` tag を作成します。tag の指す commit は `main` の履歴に含まれている必要があります。`publish.yml` workflow は version や CHANGELOG を自動変更しません。
 
-npm パッケージには GitHub Trusted Publishing を設定してください。リポジトリは `hytime/dsh-thinking-effort`、workflow は `publish.yml` です。公開は GitHub OIDC と provenance を使い、`npm publish --provenance --access public` を実行します。`NPM_TOKEN` や長期 token は使用しません。npm に同じ version が存在する場合、公開は停止します。
+npm パッケージには GitHub Trusted Publishing を設定してください。リポジトリは `mikulo/dsh-thinking-effort`、workflow は `publish.yml` です。公開は GitHub OIDC と provenance を使い、`npm publish --provenance --access public` を実行します。`NPM_TOKEN` や長期 token は使用しません。npm に同じ version が存在する場合、公開は停止します。
 
 公開前に workflow は rc7 → rc2 → alpha2 → namespace → entry の順で、5 つの一時的な公式 DSH capability representative checkout を作成します。公式 `dsh plugin` コマンドで現在の tarball をインストールしてから、実際の互換性テストを実行します。
 
@@ -391,7 +391,7 @@ npm パッケージには GitHub Trusted Publishing を設定してください�
 公式コマンドを使用します。
 
 ```bash
-dsh plugin --profile <profile> remove @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> remove @mikulo/dsh-thinking-effort
 rm -f "${DSH_HOME:-$HOME/.dsh}/thinking-effort-loaded.json"
 ```
 

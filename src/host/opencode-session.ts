@@ -19,7 +19,7 @@ import type {
 
 export { PLUGIN_SETTINGS_SCHEMA as OPENCODE_SESSION_SETTINGS_SCHEMA } from './plugin-settings.js'
 
-const LOG_PREFIX = '[@hytime/dsh-thinking-effort]'
+const LOG_PREFIX = '[@mikulo/dsh-thinking-effort]'
 
 type OpenCodeSessionRequest = {
   readonly provider: string

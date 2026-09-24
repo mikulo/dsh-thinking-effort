@@ -14,6 +14,15 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-09-24
+
+### 变更 / Changed
+
+- 成为独立 fork：包名从 `@hytime/dsh-thinking-effort` 改为 `@mikulo/dsh-thinking-effort`（loader 注册 ID、宿主/客户端运行时 ID 和日志前缀随之改变），仓库地址改为 `mikulo/dsh-thinking-effort`。本 fork 不发布到 npm，通过 `dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort` 安装。
+- Became an independent fork: the package is renamed from `@hytime/dsh-thinking-effort` to `@mikulo/dsh-thinking-effort` (the loader registration ID, host/client runtime IDs, and log prefix follow), and the repository moves to `mikulo/dsh-thinking-effort`. The fork is not published to npm; install it with `dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort`.
+- 仓库现在提交构建好的 `lib/index.js`、`lib/client.js` 和类型声明，从 git 安装时不再依赖本机编译。
+- The built `lib/index.js`, `lib/client.js`, and type declarations are now committed, so a git install no longer needs a local build.
+
 ## [0.3.3] - 2026-09-23
 
 ### 修复 / Fixed

@@ -40,7 +40,7 @@ jobs:
           PACKAGE_VERSION="$(node -p "require('./package.json').version")"
           query_output="$RUNNER_TEMP/dsh-thinking-effort-npm-view.txt"
           set +e
-          npm view @hytime/dsh-thinking-effort@${PACKAGE_VERSION} version --json > "$query_output" 2>&1
+          npm view @mikulo/dsh-thinking-effort@${PACKAGE_VERSION} version --json > "$query_output" 2>&1
           query_status=$?
           set -e
           if [ "$query_status" -eq 0 ]; then

@@ -29,7 +29,7 @@ import type {
  */
 export const OPENCODE_SESSION_DEFAULT_REGEX = '^ses_[0-9a-f]{12}[0-9A-Za-z]{14}$'
 
-const LOG_PREFIX = '[@hytime/dsh-thinking-effort]'
+const LOG_PREFIX = '[@mikulo/dsh-thinking-effort]'
 const SHA256_SEED = 'dsh-thinking-effort/opencode-session'
 const BASE62_ALPHABET = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 const DSH_SESSION_PREFIX = 'session-'

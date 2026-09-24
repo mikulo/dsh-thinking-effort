@@ -2,9 +2,10 @@
 
 为 [DSH（DeepSeek Harness）](https://github.com/deepseek-ai/deepseek-harness) 的 `llm-pi-ai` 第三方模型补充可配置的思考强度档位，并设置子 agent 的默认思考强度。
 
-[![npm version](https://img.shields.io/npm/v/@hytime/dsh-thinking-effort)](https://www.npmjs.com/package/@hytime/dsh-thinking-effort)
-[![npm downloads](https://img.shields.io/npm/dm/@hytime/dsh-thinking-effort)](https://www.npmjs.com/package/@hytime/dsh-thinking-effort)
-[![GitHub license](https://img.shields.io/github/license/hytime/dsh-thinking-effort)](https://github.com/hytime/dsh-thinking-effort/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/mikulo/dsh-thinking-effort)](https://github.com/mikulo/dsh-thinking-effort/blob/main/LICENSE)
+> **关于本 fork：** 本仓库是 [hytime/dsh-thinking-effort](https://github.com/hytime/dsh-thinking-effort) 的独立 fork，包名改为 `@mikulo/dsh-thinking-effort`，不发布到 npm，直接从 GitHub 安装、升级和卸载（见下文命令）。仓库已提交构建产物 `lib/index.js` 与 `lib/client.js`，从 git 安装时无需在本机编译；修改源码后请运行 `npm run build` 并一起提交 `lib/`。
+>
+> 从原版 `@hytime/dsh-thinking-effort` 切换：先 `dsh plugin --profile <profile> remove @hytime/dsh-thinking-effort`，再 `add github:mikulo/dsh-thinking-effort`；如果 profile 的 `cordis.patch.yml` 里还有 `id: thinking-effort` 条目，把它的 `name` 改成 `'@mikulo/dsh-thinking-effort'` 即可保留原有设置。
 
 - [English README](./README.md)
 - [日本語 README](./README.ja.md)
@@ -70,7 +71,7 @@ DSH 的 `llm-pi-ai` 适配器允许你手工声明第三方模型，但这些模
 
 | 名称 | 用途 |
 | --- | --- |
-| `@hytime/dsh-thinking-effort` | npm 包名、浏览器 bundle 请求路径、模块加载器注册 ID 和宿主/客户端运行时 ID，安装、升级和卸载时使用 |
+| `@mikulo/dsh-thinking-effort` | npm 包名、浏览器 bundle 请求路径、模块加载器注册 ID 和宿主/客户端运行时 ID，安装、升级和卸载时使用 |
 | `thinking-effort` | Cordis 组合条目 ID 和设置页 Slot ID |
 
 ## 功能概览
@@ -106,13 +107,13 @@ dsh --version
 ### 2. 安装最新版本
 
 ```bash
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort
 ```
 
 安装指定版本：
 
 ```bash
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 ```
 
 官方 CLI 会同时更新 profile 依赖、锁文件和 `dsh.profile.bundles`，无需手工追加 YAML。
@@ -120,13 +121,13 @@ dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
 ### 3. 升级
 
 ```bash
-dsh plugin --profile <profile> update @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> update @mikulo/dsh-thinking-effort
 ```
 
 ### 4. 卸载
 
 ```bash
-dsh plugin --profile <profile> remove @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> remove @mikulo/dsh-thinking-effort
 rm -f "${DSH_HOME:-$HOME/.dsh}/thinking-effort-loaded.json"
 ```
 
@@ -140,22 +141,22 @@ rm -f "${DSH_HOME:-$HOME/.dsh}/thinking-effort-loaded.json"
 
 ```text
 dsh-thinking-effort
-github:hytime/dsh-thinking-effort
+github:mikulo/dsh-thinking-effort
 ```
 
 如果旧依赖仍然存在，使用官方命令迁移：
 
 ```bash
 dsh plugin --profile <profile> remove dsh-thinking-effort
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 ```
 
 如果旧依赖已经被其他工具移除，但 profile 的 bundle 列表仍残留旧名称，先从旧 profile 的 `pnpm-lock.yaml` 找到旧 GitHub commit，再使用官方命令恢复并移除：
 
 ```bash
-dsh plugin --profile <profile> add github:hytime/dsh-thinking-effort#<old-commit>
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#<old-commit>
 dsh plugin --profile <profile> remove dsh-thinking-effort
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 ```
 
 不要把 `dsh-thinking-effort` 添加到新的 `dsh.profile.bundles` 中。
@@ -275,7 +276,7 @@ DSH 0.1.7 会把 `settings.yaml` 重命名并只导入一次，而更早版本�
 
 页面顶部是语言选择器；其下方的「子 agent 默认档位」卡片控制没有显式档位的请求。「一键设置」负责批量应用预设。供应商和模型列表支持展开/收起；每个模型行显示输入能力、上下文长度，并在设置区域提供网关兼容控件。`models[]` 保存使用完整数组 set，而不是数组索引 path op。
 
-![中文模型能力与档位设置页](https://raw.githubusercontent.com/hytime/dsh-thinking-effort/main/docs/assets/screenshots/plugin-zh-settings-expanded.png)
+![中文模型能力与档位设置页](https://raw.githubusercontent.com/mikulo/dsh-thinking-effort/main/docs/assets/screenshots/plugin-zh-settings-expanded.png)
 
 完整的中英日韩截图集见 [`docs/SCREENSHOTS.md`](./docs/SCREENSHOTS.md)。
 
@@ -290,7 +291,7 @@ DSH 0.1.7 会把 `settings.yaml` 重命名并只导入一次，而更早版本�
 ## 安装验证
 
 ```bash
-grep -n "@hytime/dsh-thinking-effort" \
+grep -n "@mikulo/dsh-thinking-effort" \
   "${DSH_HOME:-$HOME/.dsh}/profiles/<profile>/package.json"
 dsh --profile <profile> --dump-default-config
 ```
@@ -299,7 +300,7 @@ dsh --profile <profile> --dump-default-config
 
 ```yaml
 - id: thinking-effort
-  name: '@hytime/dsh-thinking-effort'
+  name: '@mikulo/dsh-thinking-effort'
 ```
 
 且不应再包含：
@@ -330,15 +331,15 @@ cat "${DSH_HOME:-$HOME/.dsh}/thinking-effort-loaded.json"
 - workflow 使用 `npm ci`；依赖变更时，维护者必须提交 `package-lock.json`。
 - 普通 CI workflow 不会发布 npm；发布只由 `publish.yml` 接收匹配的 `v<version>` tag 后执行。
 - 创建发布 tag 前，维护者先更新 `package.json` 版本和各语言 `CHANGELOG`，提交这些变更，再创建匹配的 `v<version>` tag。tag 指向的提交必须位于 `main` 历史中。
-- npm 包必须配置 GitHub Trusted Publisher：仓库为 `hytime/dsh-thinking-effort`，workflow 为 `publish.yml`。发布使用 GitHub OIDC 生成 provenance，不需要 `NPM_TOKEN`。
+- npm 包必须配置 GitHub Trusted Publisher：仓库为 `mikulo/dsh-thinking-effort`，workflow 为 `publish.yml`。发布使用 GitHub OIDC 生成 provenance，不需要 `NPM_TOKEN`。
 - 发布前 workflow 会按 rc7 → rc2 → alpha2 → namespace → entry 顺序构建并测试五个官方 DSH 能力代表：`dsh-v0.1.0-rc.7`（`0.1.0-rc.7`）、`dsh-v0.1.1-rc.2`（`0.1.1-rc.2`）、`dsh-v0.1.3-alpha.2`（`0.1.3-alpha.2`）、`dsh-v0.1.6-alpha.1`（`0.1.6-alpha.1`）和 `dsh-v0.1.7-alpha.1`（`0.1.7-alpha.1`）；通过官方 `dsh plugin` 命令安装并执行真实兼容检查，`0.1.6-alpha.1`（namespace 模型）和 `0.1.7-alpha.1`（entry-config 模型）两个代表版本都会运行真实浏览器 DOM 探针。
 - workflow 不会自动修改版本或任何 `CHANGELOG`；如果 npm 中已经存在相同版本，发布也会被阻止。
 
 ## 排查
 
 - **官方组合配置失败：** 执行 `dsh --profile <profile> --dump-default-config`，检查是否仍有旧的 `name: dsh-thinking-effort`。
-- **设置页没有出现：** 重启 DSH 后刷新 Web 页面，确认 profile 的 bundle 清单包含 `@hytime/dsh-thinking-effort`。
-- **宿主没有补齐：** 检查 `$DSH_HOME/thinking-effort-loaded.json` 是否存在；日志前缀为 `[@hytime/dsh-thinking-effort]`。
+- **设置页没有出现：** 重启 DSH 后刷新 Web 页面，确认 profile 的 bundle 清单包含 `@mikulo/dsh-thinking-effort`。
+- **宿主没有补齐：** 检查 `$DSH_HOME/thinking-effort-loaded.json` 是否存在；日志前缀为 `[@mikulo/dsh-thinking-effort]`。
 - **写入档位失败：** 检查非 `off` 档位是否填写了线上值，并确认目标模型配置仍然存在。
 - **子 agent 报 `UNSUPPORTED_REASONING_EFFORT`：** 改用该模型支持的档位，或恢复为「提供方默认」。
 

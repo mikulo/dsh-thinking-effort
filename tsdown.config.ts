@@ -78,7 +78,7 @@ const cssPlugins = [{
     const exportEntries = Object.entries(cssExports ?? {})
       .sort(([left], [right]) => (left < right ? -1 : left > right ? 1 : 0))
     for (const [local, exp] of exportEntries) classMap[local] = exp.name
-    return styleInjectionModule('@hytime/dsh-thinking-effort', fileId, code.toString(), classMap)
+    return styleInjectionModule('@mikulo/dsh-thinking-effort', fileId, code.toString(), classMap)
   },
 }, {
   name: 'dsh-css-text-inline',
@@ -109,7 +109,7 @@ const cssPlugins = [{
     this.addWatchFile(fileId)
     const source = await readFile(fileId)
     const { code } = transform({ filename: fileId, code: source, minify: true })
-    return styleInjectionModule('@hytime/dsh-thinking-effort', fileId, code.toString())
+    return styleInjectionModule('@mikulo/dsh-thinking-effort', fileId, code.toString())
   },
 }]
 
@@ -135,7 +135,7 @@ export default defineConfig([
     inputOptions: {
       plugins: cssPlugins,
     },
-    banner: "window.__ModuleLoader__.load({ id: '@hytime/dsh-thinking-effort', factory: (require) => { var module = { exports: {} }; var exports = module.exports;",
+    banner: "window.__ModuleLoader__.load({ id: '@mikulo/dsh-thinking-effort', factory: (require) => { var module = { exports: {} }; var exports = module.exports;",
     footer: 'module.exports = exports; return module.exports; } });',
     outputOptions: {
       entryFileNames: 'client.js',

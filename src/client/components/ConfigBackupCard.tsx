@@ -1,5 +1,5 @@
 import React from 'react'
-import packageJson from '@hytime/dsh-thinking-effort/package.json' with { type: 'json' }
+import packageJson from '@mikulo/dsh-thinking-effort/package.json' with { type: 'json' }
 import {
   LEGACY_FAILED_PREFIX,
   LEGACY_RESULT_APPLIED,

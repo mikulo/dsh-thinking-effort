@@ -19,7 +19,7 @@
 
 - `<profile>`：目标 DSH profile，例如 `web`；
 - `${DSH_HOME}`：DSH home，默认是 `$HOME/.dsh`；
-- `@hytime/dsh-thinking-effort`：npm 包名、浏览器 bundle 路径、loader 注册 ID 和运行时插件 ID；
+- `@mikulo/dsh-thinking-effort`：npm 包名、浏览器 bundle 路径、loader 注册 ID 和运行时插件 ID；
 - `thinking-effort`：Cordis 组合条目 ID 和设置页 Slot ID；
 - `dsh-thinking-effort`：旧版本包名和旧运行时 ID，仅用于迁移和排查历史配置。
 
@@ -259,21 +259,21 @@ ls "${DSH_HOME:-$HOME/.dsh}/profiles/<profile>"
 安装最新版本：
 
 ```bash
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort
 ```
 
 安装指定版本：
 
 ```bash
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 ```
 
 官方 CLI 会自动完成以下工作：
 
-1. 将 `@hytime/dsh-thinking-effort` 写入 profile 依赖；
+1. 将 `@mikulo/dsh-thinking-effort` 写入 profile 依赖；
 2. 更新 profile 的 pnpm lockfile；
 3. 发现包中的 `dsh.bundle` 声明；
-4. 将 `@hytime/dsh-thinking-effort` 加入 `dsh.profile.bundles`；
+4. 将 `@mikulo/dsh-thinking-effort` 加入 `dsh.profile.bundles`；
 5. 让组合树加载 `thinking-effort` 条目。
 
 不需要手工追加以下 YAML：
@@ -281,7 +281,7 @@ dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
 ```yaml
 - insert:
     - id: thinking-effort
-      name: '@hytime/dsh-thinking-effort'
+      name: '@mikulo/dsh-thinking-effort'
 ```
 
 ## 2. 升级
@@ -289,13 +289,13 @@ dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
 升级到 npm registry 中的最新版本：
 
 ```bash
-dsh plugin --profile <profile> update @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> update @mikulo/dsh-thinking-effort
 ```
 
 升级到指定版本：
 
 ```bash
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 ```
 
 升级后重新执行验证步骤。宿主侧代码需要重启 DSH；浏览器侧代码需要刷新 Web 页面。
@@ -306,7 +306,7 @@ dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
 
 ```text
 dsh-thinking-effort
-github:hytime/dsh-thinking-effort
+github:mikulo/dsh-thinking-effort
 ```
 
 ### 3.1 旧依赖仍存在
@@ -315,7 +315,7 @@ github:hytime/dsh-thinking-effort
 
 ```bash
 dsh plugin --profile <profile> remove dsh-thinking-effort
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 ```
 
 ### 3.2 旧依赖已被移除，但旧 bundle 残留
@@ -342,9 +342,9 @@ grep -n "dsh-thinking-effort" \
 然后使用官方命令恢复旧依赖、执行官方卸载，再安装新包：
 
 ```bash
-dsh plugin --profile <profile> add github:hytime/dsh-thinking-effort#<old-commit>
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#<old-commit>
 dsh plugin --profile <profile> remove dsh-thinking-effort
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 ```
 
 这一步的目的不是继续使用旧插件，而是让官方 CLI 识别旧依赖并自动删除残留 bundle。不要手工把旧包名重新写入新的 bundle 列表。
@@ -354,14 +354,14 @@ dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
 ### 4.1 检查依赖
 
 ```bash
-grep -n "@hytime/dsh-thinking-effort" \
+grep -n "@mikulo/dsh-thinking-effort" \
   "${DSH_HOME:-$HOME/.dsh}/profiles/<profile>/package.json"
 ```
 
 期望看到：
 
 ```text
-@hytime/dsh-thinking-effort
+@mikulo/dsh-thinking-effort
 ```
 
 确认旧依赖没有出现在 package manifest：
@@ -391,9 +391,9 @@ dsh --profile <profile> --dump-default-config
 期望包含：
 
 ```yaml
-# == @hytime/dsh-thinking-effort
+# == @mikulo/dsh-thinking-effort
 - id: thinking-effort
-  name: '@hytime/dsh-thinking-effort'
+  name: '@mikulo/dsh-thinking-effort'
 ```
 
 期望不包含：
@@ -415,7 +415,7 @@ cat "${DSH_HOME:-$HOME/.dsh}/thinking-effort-loaded.json"
 成功加载后应看到包含 `apply` 或 `filled-N` 的事件标记。日志前缀为：
 
 ```text
-[@hytime/dsh-thinking-effort]
+[@mikulo/dsh-thinking-effort]
 ```
 
 ### 4.4 检查浏览器侧
@@ -428,7 +428,7 @@ curl -s http://127.0.0.1:3080/ \
   | head -3
 ```
 
-根据 DSH 版本，页面清单中可能包含运行时条目 `@hytime/dsh-thinking-effort`；浏览器 bundle 的请求路径也应使用 scoped 包名，例如 `/plugins/@hytime/dsh-thinking-effort/client.js`。该 bundle 内部必须以 `@hytime/dsh-thinking-effort` 作为 `__ModuleLoader__.load` 的注册 ID，宿主和客户端插件 `name` 也应使用同一个 scoped ID。浏览器侧最终加载的是新 npm 包中已构建的 `lib/client.js`。
+根据 DSH 版本，页面清单中可能包含运行时条目 `@mikulo/dsh-thinking-effort`；浏览器 bundle 的请求路径也应使用 scoped 包名，例如 `/plugins/@mikulo/dsh-thinking-effort/client.js`。该 bundle 内部必须以 `@mikulo/dsh-thinking-effort` 作为 `__ModuleLoader__.load` 的注册 ID，宿主和客户端插件 `name` 也应使用同一个 scoped ID。浏览器侧最终加载的是新 npm 包中已构建的 `lib/client.js`。
 
 ## 5. 功能验证
 
@@ -460,7 +460,7 @@ Composer `seat` 是可选能力。`modelDirectories` 服务不可用时不会注
 
 维护者先更新 `package.json` 版本和所有适用的 `CHANGELOG`，提交这些变更，再创建匹配的 `v<version>` tag。tag 指向的提交必须位于 `main` 历史中。`publish.yml` workflow 不会自动修改版本或 CHANGELOG。
 
-请为 npm 包配置 GitHub Trusted Publisher：仓库为 `hytime/dsh-thinking-effort`，workflow 为 `publish.yml`。发布使用 GitHub OIDC 和 provenance，命令为 `npm publish --provenance --access public`，不使用 `NPM_TOKEN` 或长期 token。如果 npm 中已存在相同版本，发布会被阻止。
+请为 npm 包配置 GitHub Trusted Publisher：仓库为 `mikulo/dsh-thinking-effort`，workflow 为 `publish.yml`。发布使用 GitHub OIDC 和 provenance，命令为 `npm publish --provenance --access public`，不使用 `NPM_TOKEN` 或长期 token。如果 npm 中已存在相同版本，发布会被阻止。
 
 发布前 workflow 会按 rc7 → rc2 → alpha2 → namespace → entry 顺序创建五个临时官方 DSH 能力代表 checkout，使用官方 `dsh plugin` 命令安装当前 tarball，再运行真实兼容测试：
 
@@ -477,7 +477,7 @@ Composer `seat` 是可选能力。`modelDirectories` 服务不可用时不会注
 使用官方命令：
 
 ```bash
-dsh plugin --profile <profile> remove @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> remove @mikulo/dsh-thinking-effort
 rm -f "${DSH_HOME:-$HOME/.dsh}/thinking-effort-loaded.json"
 ```
 

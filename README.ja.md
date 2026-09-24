@@ -2,9 +2,7 @@
 
 [DSH（DeepSeek Harness）](https://github.com/deepseek-ai/deepseek-harness) の `llm-pi-ai` 手動定義モデルに推論強度を追加し、Subagent の既定の推論強度を設定できるプラグインです。
 
-[![npm version](https://img.shields.io/npm/v/@hytime/dsh-thinking-effort)](https://www.npmjs.com/package/@hytime/dsh-thinking-effort)
-[![npm downloads](https://img.shields.io/npm/dm/@hytime/dsh-thinking-effort)](https://www.npmjs.com/package/@hytime/dsh-thinking-effort)
-[![GitHub license](https://img.shields.io/github/license/hytime/dsh-thinking-effort)](https://github.com/hytime/dsh-thinking-effort/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/mikulo/dsh-thinking-effort)](https://github.com/mikulo/dsh-thinking-effort/blob/main/LICENSE)
 
 - [English README](./README.md)
 - [中文 README](./README.zh.md)
@@ -58,7 +56,7 @@ DSH 内蔵モデルだけを使用し、すでに推論コントロールが動�
 
 | 識別子 | 用途 |
 | --- | --- |
-| `@hytime/dsh-thinking-effort` | npm パッケージ、ブラウザ bundle、loader ID、Host/Client のランタイム ID |
+| `@mikulo/dsh-thinking-effort` | npm パッケージ、ブラウザ bundle、loader ID、Host/Client のランタイム ID |
 | `thinking-effort` | Cordis composition entry ID と設定 Slot ID |
 
 ## 機能
@@ -82,16 +80,16 @@ profile の管理には公式 DSH CLI を使用してください。通常の `n
 
 ```bash
 # 最新版をインストール
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort
 
 # 特定バージョンをインストール
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 
 # 更新
-dsh plugin --profile <profile> update @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> update @mikulo/dsh-thinking-effort
 
 # 削除
-dsh plugin --profile <profile> remove @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> remove @mikulo/dsh-thinking-effort
  rm -f "${DSH_HOME:-$HOME/.dsh}/thinking-effort-loaded.json"
 ```
 
@@ -204,7 +202,7 @@ DSH 0.1.7 は `settings.yaml` の名前を変更して一度だけ取り込み�
 
 ページ上部に言語セレクターがあります。その下の **Subagent default effort** カードは明示値のないリクエストの既定値を管理します。**Quick settings** は一括プリセットを適用します。プロバイダーとモデルの一覧は展開/折りたたみができ、各モデル行に入力能力、コンテキスト長、ゲートウェイ互換値の編集領域が表示されます。`models[]` の保存は配列インデックス path op ではなく、配列全体の set を使用します。
 
-![日本語版 Model capabilities and effort 設定ページ](https://raw.githubusercontent.com/hytime/dsh-thinking-effort/main/docs/assets/screenshots/plugin-ja-settings-expanded.png)
+![日本語版 Model capabilities and effort 設定ページ](https://raw.githubusercontent.com/mikulo/dsh-thinking-effort/main/docs/assets/screenshots/plugin-ja-settings-expanded.png)
 
 中英韓日すべての画面は [`docs/SCREENSHOTS.md`](./docs/SCREENSHOTS.md) を参照してください。
 
@@ -231,7 +229,7 @@ DSH 0.1.7 は `settings.yaml` の名前を変更して一度だけ取り込み�
 - workflow は `npm ci` を使用するため、依存関係を変更した場合はメンテナーが `package-lock.json` をコミットしてください。
 - 通常の CI workflow は npm に公開しません。`publish.yml` は `v<version>` tag によってのみ公開を開始します。
 - リリース tag を作成する前に、メンテナーは `package.json` の version と各言語の `CHANGELOG` を更新してコミットし、一致する `v<version>` tag を作成します。tag の指す commit は `main` の履歴に含まれている必要があります。
-- npm パッケージには GitHub Trusted Publisher を設定してください。リポジトリは `hytime/dsh-thinking-effort`、workflow は `publish.yml` です。公開は GitHub OIDC による provenance を含み、`NPM_TOKEN` は必要ありません。
+- npm パッケージには GitHub Trusted Publisher を設定してください。リポジトリは `mikulo/dsh-thinking-effort`、workflow は `publish.yml` です。公開は GitHub OIDC による provenance を含み、`NPM_TOKEN` は必要ありません。
 - 公開前に workflow は rc7 → rc2 → alpha2 → namespace → entry の順で 5 つの公式 DSH capability representative を構築・テストします：`dsh-v0.1.0-rc.7`（`0.1.0-rc.7`）、`dsh-v0.1.1-rc.2`（`0.1.1-rc.2`）、`dsh-v0.1.3-alpha.2`（`0.1.3-alpha.2`）、`dsh-v0.1.6-alpha.1`（`0.1.6-alpha.1`）、`dsh-v0.1.7-alpha.1`（`0.1.7-alpha.1`）。公式の `dsh plugin` コマンドでインストールし、実際の互換性テストを実行します。実ブラウザ DOM プローブは `0.1.6-alpha.1`（namespace モデル）と `0.1.7-alpha.1`（entry-config モデル）の両方の代表で実行します。
 - workflow は version や `CHANGELOG` を自動変更しません。npm に同じ version が既にある場合も公開を停止します。
 

@@ -18,7 +18,7 @@ The placeholders in this guide are:
 
 - `<profile>`: the DSH profile to modify, usually `web`;
 - `${DSH_HOME}`: the DSH home directory, defaulting to `$HOME/.dsh`;
-- `@hytime/dsh-thinking-effort`: the npm package and runtime plugin ID;
+- `@mikulo/dsh-thinking-effort`: the npm package and runtime plugin ID;
 - `thinking-effort`: the Cordis composition and settings Slot ID.
 
 ## 0. Prerequisites and profile discovery
@@ -247,13 +247,13 @@ To look for legacy items on demand, open the settings page and use **Rescan lega
 Install the latest version:
 
 ```bash
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort
 ```
 
 Install the current release explicitly:
 
 ```bash
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 ```
 
 The official CLI updates the profile dependency, lockfile, and `dsh.profile.bundles` automatically. Do not add a manual YAML row.
@@ -263,13 +263,13 @@ The official CLI updates the profile dependency, lockfile, and `dsh.profile.bund
 Upgrade to the latest registry version:
 
 ```bash
-dsh plugin --profile <profile> update @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> update @mikulo/dsh-thinking-effort
 ```
 
 Upgrade to a specific version:
 
 ```bash
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 ```
 
 Restart DSH for host changes and refresh the Web page for client changes.
@@ -280,14 +280,14 @@ Older installations may use:
 
 ```text
 dsh-thinking-effort
-github:hytime/dsh-thinking-effort
+github:mikulo/dsh-thinking-effort
 ```
 
 If the old dependency still exists, use the official commands:
 
 ```bash
 dsh plugin --profile <profile> remove dsh-thinking-effort
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 ```
 
 If the dependency was removed by another tool but the old bundle remains, inspect the composed profile:
@@ -299,9 +299,9 @@ dsh --profile <profile> --dump-default-config
 If it still contains `name: dsh-thinking-effort`, find the old GitHub commit in the profile lockfile and let the official CLI reconcile it:
 
 ```bash
-dsh plugin --profile <profile> add github:hytime/dsh-thinking-effort#<old-commit>
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#<old-commit>
 dsh plugin --profile <profile> remove dsh-thinking-effort
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 ```
 
 Do not add the old package name to a new bundle list.
@@ -311,9 +311,9 @@ Do not add the old package name to a new bundle list.
 Check the dependency and installed version:
 
 ```bash
-grep -n "@hytime/dsh-thinking-effort" \
+grep -n "@mikulo/dsh-thinking-effort" \
   "${DSH_HOME:-$HOME/.dsh}/profiles/<profile>/package.json"
-node -p "require('${DSH_HOME:-$HOME/.dsh}/profiles/<profile>/node_modules/@hytime/dsh-thinking-effort/package.json').version"
+node -p "require('${DSH_HOME:-$HOME/.dsh}/profiles/<profile>/node_modules/@mikulo/dsh-thinking-effort/package.json').version"
 ```
 
 The version must be `0.3.3` for this release.
@@ -332,7 +332,7 @@ It must contain:
 
 ```yaml
 - id: thinking-effort
-  name: '@hytime/dsh-thinking-effort'
+  name: '@mikulo/dsh-thinking-effort'
 ```
 
 It must not contain an old bundle row with:
@@ -379,7 +379,7 @@ cat "${DSH_HOME:-$HOME/.dsh}/thinking-effort-loaded.json"
 
 Maintainers update the `package.json` version and all applicable `CHANGELOG` files, commit those changes, and create the matching `v<version>` tag. The tag must point to a commit in the `main` history. The `publish.yml` workflow does not change versions or changelogs automatically.
 
-Configure npm GitHub Trusted Publishing for repository `hytime/dsh-thinking-effort` and workflow `publish.yml`. Publishing uses GitHub OIDC and provenance with `npm publish --provenance --access public`; no `NPM_TOKEN` or long-lived token is used. A version that already exists in npm blocks the release.
+Configure npm GitHub Trusted Publishing for repository `mikulo/dsh-thinking-effort` and workflow `publish.yml`. Publishing uses GitHub OIDC and provenance with `npm publish --provenance --access public`; no `NPM_TOKEN` or long-lived token is used. A version that already exists in npm blocks the release.
 
 Before publishing, the workflow builds five temporary official DSH capability representatives in rc7 → rc2 → alpha2 → namespace → entry order and runs the real compatibility suite after installing the current tarball with the official `dsh plugin` command:
 
@@ -396,7 +396,7 @@ The ordinary CI workflow remains test-only and runs on pull requests and `main` 
 Use the official command:
 
 ```bash
-dsh plugin --profile <profile> remove @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> remove @mikulo/dsh-thinking-effort
 rm -f "${DSH_HOME:-$HOME/.dsh}/thinking-effort-loaded.json"
 ```
 

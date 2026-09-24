@@ -2,7 +2,7 @@ import React from 'react'
 import { GATEWAY_COMPAT_FIELD_KEYS, type GatewayCompatFieldKey } from '../compat/gateway/fields.js'
 import { editableProviderCompatFields } from '../compat/gateway/validation.js'
 import { isOpenCodeSessionSectionId } from '../compat/opencode-session.js'
-import packageJson from '@hytime/dsh-thinking-effort/package.json' with { type: 'json' }
+import packageJson from '@mikulo/dsh-thinking-effort/package.json' with { type: 'json' }
 import { DEFAULT_LEVELS, INPUT_MODALITIES, LEVEL_LABEL_KEYS, NS, OPENCODE_SESSION_NS, PRESETS, ALL_LEVELS, CONTEXT_1M } from './constants.js'
 import { inventoryFrom, modelCompatKey, modelGatewayCompatViewsFrom, providerGatewayCompatViewsFrom } from './model-inventory.js'
 import { emptyTakeoverRuntimeResolution } from './takeover-runtime.js'

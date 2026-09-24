@@ -632,7 +632,7 @@ async function probePackagedArtifactHandMountedRuntime(
       at?: string
       pid?: number
     }
-    expect(marker).toMatchObject({ event: 'apply', name: '@hytime/dsh-thinking-effort' })
+    expect(marker).toMatchObject({ event: 'apply', name: '@mikulo/dsh-thinking-effort' })
     expect(marker.at).toEqual(expect.any(String))
     expect(marker.pid).toEqual(expect.any(Number))
     return {
@@ -1178,7 +1178,7 @@ describe('compatibility documentation and root validation', () => {
   it.each(compatibilityDocumentationFiles)('enforces the compatibility contract in %s', (file) => {
     const document = readFileSync(join(root, file), 'utf8')
     expect(existsSync(join(root, file))).toBe(true)
-    expect(document, `${file}: missing scoped package name`).toContain('@hytime/dsh-thinking-effort')
+    expect(document, `${file}: missing scoped package name`).toContain('@mikulo/dsh-thinking-effort')
     for (const { name, pattern } of documentationContract) {
       expect(document, `${file}: missing ${name}`).toMatch(pattern)
     }
@@ -1309,7 +1309,7 @@ describe('published package composition', () => {
   it('exposes built Host and Client artifacts with declarations', () => {
     const manifest = readPackage()
 
-    expect(manifest.version).toBe('0.3.3')
+    expect(manifest.version).toBe('0.4.0')
     expect(manifest.main).toBe('./lib/index.js')
     expect(manifest.types).toBe('./lib/types/index.d.ts')
     expect(manifest.exports['.']).toEqual({
@@ -1382,18 +1382,18 @@ integrationDescribe('official DSH loader composition', () => {
     const profileManifest = JSON.parse(readFileSync(join(profile, 'package.json'), 'utf8')) as {
       dependencies?: Record<string, string>
     }
-    expect(profileManifest.dependencies?.['@hytime/dsh-thinking-effort']).toBeDefined()
+    expect(profileManifest.dependencies?.['@mikulo/dsh-thinking-effort']).toBeDefined()
     expect(profileManifest.dependencies?.['dsh-thinking-effort']).toBeUndefined()
 
     const dump = runOfficialDsh(cliRoot, home, ['--profile', 'compat', '--dump-default-config'])
     expect(dump).toContain('id: thinking-effort')
-    expect(dump).toContain("name: '@hytime/dsh-thinking-effort'")
+    expect(dump).toContain("name: '@mikulo/dsh-thinking-effort'")
     expect(dump).not.toContain('name: dsh-thinking-effort')
 
-    const installedDir = join(profile, 'node_modules', '@hytime', 'dsh-thinking-effort')
+    const installedDir = join(profile, 'node_modules', '@mikulo', 'dsh-thinking-effort')
     const installedManifest = JSON.parse(readFileSync(join(installedDir, 'package.json'), 'utf8')) as PackageManifest
-    expect(installedManifest.name).toBe('@hytime/dsh-thinking-effort')
-    expect(installedManifest.version).toBe('0.3.3')
+    expect(installedManifest.name).toBe('@mikulo/dsh-thinking-effort')
+    expect(installedManifest.version).toBe('0.4.0')
 
     const hostEntry = join(installedDir, 'lib', 'index.js')
     const clientEntry = join(installedDir, 'lib', 'client.js')
@@ -1438,7 +1438,7 @@ integrationDescribe('official DSH loader composition', () => {
            at?: string
            pid?: number
          }
-         expect(webMarker).toMatchObject({ event: 'apply', name: '@hytime/dsh-thinking-effort' })
+         expect(webMarker).toMatchObject({ event: 'apply', name: '@mikulo/dsh-thinking-effort' })
          expect(webMarker.at).toEqual(expect.any(String))
          expect(webMarker.pid).toEqual(expect.any(Number))
          const liveResult = (endpoint: string, args: Record<string, unknown>): Promise<unknown> => (
@@ -1647,8 +1647,8 @@ integrationDescribe('official DSH loader composition', () => {
          expect(indexResponse.status).toBe(200)
         const indexHtml = await indexResponse.text()
         const bootRows = extractBootRows(indexHtml)
-        const bundleUrl = extractBundleUrl(indexHtml, '@hytime/dsh-thinking-effort')
-        expect(bundleUrl).toMatch(/\/plugins\/(?:\?\?@hytime\/dsh-thinking-effort\/client\.js&rev=|@hytime\/dsh-thinking-effort\/client\.js\?rev=)/)
+        const bundleUrl = extractBundleUrl(indexHtml, '@mikulo/dsh-thinking-effort')
+        expect(bundleUrl).toMatch(/\/plugins\/(?:\?\?@mikulo\/dsh-thinking-effort\/client\.js&rev=|@mikulo\/dsh-thinking-effort\/client\.js\?rev=)/)
         const response = await fetch(new URL(bundleUrl, web.url), {
           headers,
           signal: AbortSignal.timeout(10000),
@@ -1657,7 +1657,7 @@ integrationDescribe('official DSH loader composition', () => {
          expect(response.status).toBe(200)
         const servedCode = await response.text()
         expect(servedCode).toContain(clientCode)
-        expect(servedCode).toContain("id: '@hytime/dsh-thinking-effort'")
+        expect(servedCode).toContain("id: '@mikulo/dsh-thinking-effort'")
         runInNewContext(servedCode, {
           window: {
             __ModuleLoader__: {
@@ -1773,7 +1773,7 @@ integrationDescribe('official DSH loader composition', () => {
      expect(existsSync(handMountedProbe.settingsHome)).toBe(false)
     expect(existsSync(handMountedProbe.settingsPath)).toBe(false)
     expect(existsSync(handMountedProbe.handMountedMarkerPath)).toBe(false)
-    expect(handMountedProbe.handMountedMarker).toMatchObject({ event: 'apply', name: '@hytime/dsh-thinking-effort' })
+    expect(handMountedProbe.handMountedMarker).toMatchObject({ event: 'apply', name: '@mikulo/dsh-thinking-effort' })
     if (runtimeProbe.modern.supportsExternalLanguages) {
       expect(runtimeProbe.modern.languages).toEqual(expect.arrayContaining(['ja', 'ko']))
     } else {
@@ -1789,7 +1789,7 @@ integrationDescribe('official DSH loader composition', () => {
     }
     expect(runtimeProbe.legacy.sectionIds).toContain('thinking-effort')
     expect(registered).toHaveLength(1)
-    expect(registered[0]?.id).toBe('@hytime/dsh-thinking-effort')
+    expect(registered[0]?.id).toBe('@mikulo/dsh-thinking-effort')
       expect(typeof registered[0]?.factory).toBe('function')
       } finally {
         rmSync(home, { recursive: true, force: true })
@@ -1851,7 +1851,7 @@ integrationDescribe('official DSH loader composition', () => {
       runOfficialDsh(cliRoot, home, ['plugin', '--profile', 'compat', 'add', tarball])
       const dump = runOfficialDsh(cliRoot, home, ['--profile', 'compat', '--dump-default-config'])
       expect(dump).toContain(`id: ${PLUGIN_ENTRY_ID}`)
-      expect(dump).toContain("name: '@hytime/dsh-thinking-effort'")
+      expect(dump).toContain("name: '@mikulo/dsh-thinking-effort'")
       expect(dump).not.toContain('name: dsh-thinking-effort')
 
       runOfficialDsh(cliRoot, webHome, ['plugin', '--profile', 'web', 'add', tarball])
@@ -1881,7 +1881,7 @@ integrationDescribe('official DSH loader composition', () => {
         // is the half the namespace loop checks for its roots and the half a
         // 0.1.7 Web host could break on its own (boot-graph entry, plugin asset
         // route) without the RPC reads noticing.
-        const webInstalled = join(webHome, 'profiles', 'web', 'node_modules', '@hytime', 'dsh-thinking-effort')
+        const webInstalled = join(webHome, 'profiles', 'web', 'node_modules', '@mikulo', 'dsh-thinking-effort')
         const clientEntry = join(webInstalled, 'lib', 'client.js')
         expect(existsSync(clientEntry)).toBe(true)
         const clientCode = readFileSync(clientEntry, 'utf8')
@@ -1889,11 +1889,11 @@ integrationDescribe('official DSH loader composition', () => {
         expect(indexResponse.status).toBe(200)
         const indexHtml = await indexResponse.text()
         const bootRows = extractBootRows(indexHtml)
-        const bundleUrl = extractBundleUrl(indexHtml, '@hytime/dsh-thinking-effort')
+        const bundleUrl = extractBundleUrl(indexHtml, '@mikulo/dsh-thinking-effort')
         // 0.1.6 advertises this entry as a root-absolute URL and 0.1.7 as a
         // page-relative one, so the leading slash is optional here; both are
         // resolved against the served origin below either way.
-        expect(bundleUrl).toMatch(/(?:^|\/)plugins\/(?:\?\?@hytime\/dsh-thinking-effort\/client\.js&rev=|@hytime\/dsh-thinking-effort\/client\.js\?rev=)/)
+        expect(bundleUrl).toMatch(/(?:^|\/)plugins\/(?:\?\?@mikulo\/dsh-thinking-effort\/client\.js&rev=|@mikulo\/dsh-thinking-effort\/client\.js\?rev=)/)
         const bundleResponse = await fetch(new URL(bundleUrl, web.url), {
           headers,
           signal: AbortSignal.timeout(10000),
@@ -1901,7 +1901,7 @@ integrationDescribe('official DSH loader composition', () => {
         expect(bundleResponse.status).toBe(200)
         const servedCode = await bundleResponse.text()
         expect(servedCode).toContain(clientCode)
-        expect(servedCode).toContain("id: '@hytime/dsh-thinking-effort'")
+        expect(servedCode).toContain("id: '@mikulo/dsh-thinking-effort'")
 
         const namespaces = await readNamespaces()
 
@@ -1935,7 +1935,7 @@ integrationDescribe('official DSH loader composition', () => {
         const markerPath = join(webHome, 'thinking-effort-loaded.json')
         expect(existsSync(markerPath)).toBe(true)
         const marker = JSON.parse(readFileSync(markerPath, 'utf8')) as { event?: string; name?: string }
-        expect(marker).toMatchObject({ event: 'apply', name: '@hytime/dsh-thinking-effort' })
+        expect(marker).toMatchObject({ event: 'apply', name: '@mikulo/dsh-thinking-effort' })
 
         const route = 'entry-config-compat'
         const seeded = {

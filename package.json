@@ -1,6 +1,6 @@
 {
-  "name": "@hytime/dsh-thinking-effort",
-  "version": "0.3.3",
+  "name": "@mikulo/dsh-thinking-effort",
+  "version": "0.4.0",
   "description": "为 DSH 的 pi-ai 第三方模型补充可配置的思考强度档位，并设置子 agent 默认思考强度。",
   "private": false,
   "engines": {
@@ -18,13 +18,13 @@
   "type": "module",
   "main": "./lib/index.js",
   "types": "./lib/types/index.d.ts",
-  "homepage": "https://github.com/hytime/dsh-thinking-effort#readme",
+  "homepage": "https://github.com/mikulo/dsh-thinking-effort#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hytime/dsh-thinking-effort.git"
+    "url": "https://github.com/mikulo/dsh-thinking-effort.git"
   },
   "bugs": {
-    "url": "https://github.com/hytime/dsh-thinking-effort/issues"
+    "url": "https://github.com/mikulo/dsh-thinking-effort/issues"
   },
   "publishConfig": {
     "access": "public"

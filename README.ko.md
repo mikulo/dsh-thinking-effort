@@ -2,9 +2,7 @@
 
 [DSH (DeepSeek Harness)](https://github.com/deepseek-ai/deepseek-harness)의 `llm-pi-ai` 수동 선언 모델에 추론 강도를 추가하고 Subagent의 기본 추론 강도를 설정하는 플러그인입니다.
 
-[![npm version](https://img.shields.io/npm/v/@hytime/dsh-thinking-effort)](https://www.npmjs.com/package/@hytime/dsh-thinking-effort)
-[![npm downloads](https://img.shields.io/npm/dm/@hytime/dsh-thinking-effort)](https://www.npmjs.com/package/@hytime/dsh-thinking-effort)
-[![GitHub license](https://img.shields.io/github/license/hytime/dsh-thinking-effort)](https://github.com/hytime/dsh-thinking-effort/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/mikulo/dsh-thinking-effort)](https://github.com/mikulo/dsh-thinking-effort/blob/main/LICENSE)
 
 - [English README](./README.md)
 - [中文 README](./README.zh.md)
@@ -58,7 +56,7 @@ DSH 내장 모델만 사용하고 이미 추론 제어가 정상 작동한다면
 
 | 식별자 | 용도 |
 | --- | --- |
-| `@hytime/dsh-thinking-effort` | npm 패키지, 브라우저 bundle, loader ID, Host/Client 런타임 ID |
+| `@mikulo/dsh-thinking-effort` | npm 패키지, 브라우저 bundle, loader ID, Host/Client 런타임 ID |
 | `thinking-effort` | Cordis composition entry ID 및 설정 Slot ID |
 
 ## 기능
@@ -82,16 +80,16 @@ profile은 공식 DSH CLI로 관리하세요. 일반 `npm install`은 DSH profil
 
 ```bash
 # 최신 버전 설치
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort
 
 # 특정 버전 설치
-dsh plugin --profile <profile> add @hytime/dsh-thinking-effort@0.3.3
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
 
 # 업데이트
-dsh plugin --profile <profile> update @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> update @mikulo/dsh-thinking-effort
 
 # 제거
-dsh plugin --profile <profile> remove @hytime/dsh-thinking-effort
+dsh plugin --profile <profile> remove @mikulo/dsh-thinking-effort
 rm -f "${DSH_HOME:-$HOME/.dsh}/thinking-effort-loaded.json"
 ```
 
@@ -204,7 +202,7 @@ DSH 0.1.7은 `settings.yaml`의 이름을 바꾸고 한 번만 가져오는데, 
 
 페이지 상단에는 언어 선택기가 있습니다. 그 아래의 **Subagent default effort** 카드는 명시적인 값이 없는 요청의 기본값을 관리합니다. **Quick settings**는 일괄 프리셋을 적용합니다. 제공자와 모델 목록은 펼치거나 접을 수 있으며, 각 모델 행에는 입력 기능, 컨텍스트 길이 및 게이트웨이 호환성 편집 영역이 표시됩니다. `models[]` 저장은 배열 인덱스 path op가 아니라 전체 배열 set을 사용합니다.
 
-![한국어 Model capabilities and effort 설정 페이지](https://raw.githubusercontent.com/hytime/dsh-thinking-effort/main/docs/assets/screenshots/plugin-ko-settings-expanded.png)
+![한국어 Model capabilities and effort 설정 페이지](https://raw.githubusercontent.com/mikulo/dsh-thinking-effort/main/docs/assets/screenshots/plugin-ko-settings-expanded.png)
 
 전체 중영일한 화면은 [`docs/SCREENSHOTS.md`](./docs/SCREENSHOTS.md)에서 확인할 수 있습니다.
 
@@ -231,7 +229,7 @@ DSH 0.1.7은 `settings.yaml`의 이름을 바꾸고 한 번만 가져오는데, 
 - workflow는 `npm ci`를 사용하므로 의존성을 변경할 때 유지 관리자는 `package-lock.json`을 커밋해야 합니다.
 - 일반 CI workflow는 npm에 게시하지 않습니다. `publish.yml`은 `v<version>` tag에서만 게시를 시작합니다.
 - 릴리스 tag를 만들기 전에 유지 관리자는 `package.json` 버전과 각 언어의 `CHANGELOG`를 업데이트하여 커밋하고 일치하는 `v<version>` tag를 만듭니다. tag가 가리키는 커밋은 `main` 기록에 포함되어야 합니다.
-- npm 패키지에 GitHub Trusted Publisher를 설정해야 합니다. 저장소는 `hytime/dsh-thinking-effort`, workflow는 `publish.yml`입니다. 게시에는 GitHub OIDC provenance가 포함되며 `NPM_TOKEN`이 필요하지 않습니다.
+- npm 패키지에 GitHub Trusted Publisher를 설정해야 합니다. 저장소는 `mikulo/dsh-thinking-effort`, workflow는 `publish.yml`입니다. 게시에는 GitHub OIDC provenance가 포함되며 `NPM_TOKEN`이 필요하지 않습니다.
 - 게시 전에 workflow는 rc7 → rc2 → alpha2 → namespace → entry 순서로 다섯 공식 DSH capability representative를 빌드하고 테스트합니다: `dsh-v0.1.0-rc.7` (`0.1.0-rc.7`), `dsh-v0.1.1-rc.2` (`0.1.1-rc.2`), `dsh-v0.1.3-alpha.2` (`0.1.3-alpha.2`), `dsh-v0.1.6-alpha.1` (`0.1.6-alpha.1`), `dsh-v0.1.7-alpha.1` (`0.1.7-alpha.1`). 공식 `dsh plugin` 명령으로 설치한 뒤 실제 호환성 테스트를 실행하며, 실제 브라우저 DOM 프로브는 `0.1.6-alpha.1`(namespace 모델)과 `0.1.7-alpha.1`(entry-config 모델) representative 모두에서 수행합니다.
 - workflow는 버전이나 `CHANGELOG`를 자동으로 변경하지 않습니다. npm에 같은 버전이 이미 있으면 게시도 중단됩니다.
 
