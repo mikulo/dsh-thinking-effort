@@ -90,7 +90,7 @@ Use the official DSH CLI to manage the plugin profile. A plain `npm install` doe
 dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort
 
 # Install a specific version
-dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.1
 
 # Upgrade
 dsh plugin --profile <profile> update @mikulo/dsh-thinking-effort

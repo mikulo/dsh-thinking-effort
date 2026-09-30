@@ -83,7 +83,7 @@ profile の管理には公式 DSH CLI を使用してください。通常の `n
 dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort
 
 # 特定バージョンをインストール
-dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.1
 
 # 更新
 dsh plugin --profile <profile> update @mikulo/dsh-thinking-effort

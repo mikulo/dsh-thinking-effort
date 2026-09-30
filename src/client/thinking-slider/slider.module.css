@@ -21,10 +21,29 @@
   padding: 16px;
   border: 0;
   border-radius: 8px;
-  background: var(--dsw-specific-menu);
+  isolation: isolate;
   color: var(--dsw-alias-label-primary);
   --dsw-elevation-stroke-color: var(--dsw-alias-border-l1);
   box-shadow: var(--dsw-elevation-prominent);
+}
+
+/*
+ * The menu fill and blur live on a pseudo-element (the same pattern DSH's own
+ * conversation panel uses) rather than on .panel itself: an element with
+ * backdrop-filter becomes a Backdrop Root, which would limit the nested
+ * .modelMenu blur to the panel's own pixels and leave the part of the menu that
+ * overhangs the panel with no blur at all.
+ */
+.panel::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--dsw-specific-menu);
+  -webkit-backdrop-filter: var(--dsw-menu-backdrop-filter);
+  backdrop-filter: var(--dsw-menu-backdrop-filter);
+  content: '';
+  pointer-events: none;
 }
 
 .reasoning {
@@ -366,8 +385,22 @@
   border: 0;
   border-radius: 6px;
   background: var(--dsw-specific-menu);
+  -webkit-backdrop-filter: var(--dsw-menu-backdrop-filter);
+  backdrop-filter: var(--dsw-menu-backdrop-filter);
   box-shadow: var(--dsw-elevation-prominent);
   color: var(--dsw-alias-label-primary);
+}
+
+/*
+ * The theme's menu fill is translucent by design and only reads correctly
+ * together with the menu backdrop blur. Where backdrop-filter is unsupported,
+ * fall back to an opaque layer so the text stays legible.
+ */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .panel::before,
+  .modelMenu {
+    background: var(--dsw-alias-bg-layer-1);
+  }
 }
 
 .modelSearch {

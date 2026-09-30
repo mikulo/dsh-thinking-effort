@@ -83,7 +83,7 @@ profile은 공식 DSH CLI로 관리하세요. 일반 `npm install`은 DSH profil
 dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort
 
 # 특정 버전 설치
-dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.1
 
 # 업데이트
 dsh plugin --profile <profile> update @mikulo/dsh-thinking-effort

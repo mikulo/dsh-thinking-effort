@@ -14,6 +14,18 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-09-30
+
+### 修复 / Fixed
+
+- 修复输入框的思考强度面板和面板内的模型搜索下拉菜单过于透明、文字看不清的问题。DSH 主题的菜单底色 `--dsw-specific-menu` 本身是半透明的（Windows 浅色约 58%、深色约 45% 不透明度），需要配合 `--dsw-menu-backdrop-filter` 背景模糊使用；这两个弹层此前只设置了底色、没有设置模糊，背后的聊天内容会直接透出并与菜单文字重叠（macOS 上主题改用接近不透明的底色，因此看不出问题）。现在两者与原生菜单一样同时使用主题的背景模糊变量，跟随主题和皮肤；面板的底色和模糊放在 `::before` 伪元素上（与 DSH 自己的对话面板同一写法），避免面板成为 Backdrop Root，使超出面板范围的模型下拉菜单也能模糊到后面的聊天内容；在不支持 `backdrop-filter` 的环境中改用不透明的 `--dsw-alias-bg-layer-1` 底色。仅修改样式，交互行为不变。
+- Fix the input box's thinking-effort panel and its model search menu being so transparent that their text was hard to read. The DSH theme's menu fill `--dsw-specific-menu` is translucent by design (about 58% opaque in the Windows light theme and 45% in dark) and is meant to be paired with the `--dsw-menu-backdrop-filter` blur; both popovers set the fill without the blur, so the conversation behind them showed through and overlapped the menu text (macOS was unaffected because the theme uses a near-opaque fill there). Both now apply the theme's backdrop-filter variable exactly like the native menus, following the theme and any skin. The panel's fill and blur sit on a `::before` pseudo-element (the pattern DSH's own conversation panel uses) so the panel does not become a Backdrop Root, which lets the model menu blur the conversation even where it overhangs the panel. Both fall back to the opaque `--dsw-alias-bg-layer-1` fill where `backdrop-filter` is unsupported. Styling only; behaviour is unchanged.
+
+### 变更 / Changed
+
+- 构建产物不再包含构建机器的绝对路径：CSS 虚拟模块 ID 和 lightningcss 的文件名改用包内相对路径，`lib/client.js` 的 `//#region` 注释里不再出现本机目录，CSS Modules 类名哈希也不再随构建机器或目录变化，任何位置构建出的 `lib/` 都完全一致。
+- The build no longer embeds the builder's absolute path: CSS virtual module ids and the lightningcss filename are package-relative, so `lib/client.js` `//#region` comments carry no local directory, and CSS Modules class hashes no longer depend on the machine or checkout location — `lib/` builds byte-identical anywhere.
+
 ## [0.4.0] - 2026-09-24
 
 ### 变更 / Changed

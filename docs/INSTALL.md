@@ -253,7 +253,7 @@ dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort
 Install the current release explicitly:
 
 ```bash
-dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.1
 ```
 
 The official CLI updates the profile dependency, lockfile, and `dsh.profile.bundles` automatically. Do not add a manual YAML row.
@@ -269,7 +269,7 @@ dsh plugin --profile <profile> update @mikulo/dsh-thinking-effort
 Upgrade to a specific version:
 
 ```bash
-dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.1
 ```
 
 Restart DSH for host changes and refresh the Web page for client changes.
@@ -287,7 +287,7 @@ If the old dependency still exists, use the official commands:
 
 ```bash
 dsh plugin --profile <profile> remove dsh-thinking-effort
-dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.1
 ```
 
 If the dependency was removed by another tool but the old bundle remains, inspect the composed profile:
@@ -301,7 +301,7 @@ If it still contains `name: dsh-thinking-effort`, find the old GitHub commit in 
 ```bash
 dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#<old-commit>
 dsh plugin --profile <profile> remove dsh-thinking-effort
-dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.0
+dsh plugin --profile <profile> add github:mikulo/dsh-thinking-effort#v0.4.1
 ```
 
 Do not add the old package name to a new bundle list.
